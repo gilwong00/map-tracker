@@ -3,5 +3,6 @@ declare namespace NodeJS {
     MONGO_URI: string;
     JWT_SECRET: string;
     NODE_ENV: string;
+    PORT: number;
   }
 }
