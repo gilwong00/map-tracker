@@ -1,8 +1,8 @@
 import { Router, Request, Response } from 'express';
-import jwt from 'jsonwebtoken';
 import { hash, verify } from 'argon2';
 import { User } from '../schema';
 import { UserDocument } from '../schema/user';
+import jwt from 'jsonwebtoken';
 import requireAuth from '../middleware/requireAuth';
 
 const router = Router();
