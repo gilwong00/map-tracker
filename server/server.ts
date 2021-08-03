@@ -12,7 +12,7 @@ const initServer = (): void => {
 
     app.use(cors());
     app.use(express.json());
-		app.use('/api', router);
+    app.use('/api', router);
 
     mongoose
       .connect(process.env.MONGO_URI as string, {
@@ -29,11 +29,10 @@ const initServer = (): void => {
       app.listen(PORT, () => console.log(`Running on port ${PORT}`));
     });
 
-		mongoose.connection.on('err', (err) => {
+    mongoose.connection.on('err', err => {
       console.error('Error connecting to mongo', err);
-      process.exit(1)
-    })
-
+      process.exit(1);
+    });
   } catch (err) {
     console.log(`Erroring starting server: \n ${JSON.stringify(err, null, 2)}`);
   }
