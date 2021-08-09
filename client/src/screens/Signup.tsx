@@ -1,32 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { View, StyleSheet, Alert, TouchableOpacity } from 'react-native';
+import { View, Alert, TouchableOpacity } from 'react-native';
 import { Text, Button } from 'react-native-elements';
 import { useMutation } from 'react-query';
 import { signup } from '../api';
+import { authStyles } from '../styles';
 import FormInput from '../components/FormInput';
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    marginBottom: 100,
-    padding: 10
-  },
-  title: {
-    paddingLeft: 10,
-    paddingBottom: 25,
-    textAlign: 'center'
-  },
-  signUpBtn: {
-    paddingTop: 30
-  },
-  signInText: {
-    color: 'blue',
-    textAlign: 'center',
-    paddingTop: 10
-  }
-});
 
 const Signup = () => {
   const [firstName, setFirstName] = useState<string>('');
@@ -46,8 +25,8 @@ const Signup = () => {
   });
 
   return (
-    <View style={styles.container}>
-      <Text h3 style={styles.title}>
+    <View style={authStyles.container}>
+      <Text h3 style={authStyles.title}>
         Sign up for Tracker
       </Text>
       <FormInput
@@ -65,7 +44,7 @@ const Signup = () => {
       <FormInput label='Password' value={password} handleChange={setPassword} />
 
       <Button
-        style={styles.signUpBtn}
+        style={authStyles.authBtn}
         title='Sign up'
         onPress={async () =>
           await mutateAsync({ firstName, lastName, email, password })
@@ -73,7 +52,7 @@ const Signup = () => {
         accessibilityLabel='Sign up'
       />
       <TouchableOpacity onPress={() => navigation.navigate('Signin')}>
-        <Text style={styles.signInText}>
+        <Text style={authStyles.authText}>
           If you have an account, click here to log in
         </Text>
       </TouchableOpacity>

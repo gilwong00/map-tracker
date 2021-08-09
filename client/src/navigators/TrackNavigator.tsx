@@ -7,7 +7,10 @@ const TrackStackNavigator = createStackNavigator();
 
 const TrackNavigator = () => {
   return (
-    <TrackStackNavigator.Navigator initialRouteName='TrackList'>
+    <TrackStackNavigator.Navigator
+      initialRouteName='TrackList'
+      screenOptions={{ headerShown: false }}
+    >
       <TrackStackNavigator.Screen name='TrackList' component={TrackList} />
       <TrackStackNavigator.Screen name='TrackDetail' component={TrackDetail} />
     </TrackStackNavigator.Navigator>

@@ -1,39 +1,35 @@
-import React, { createContext, useReducer } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-// import { whoami } from '../api';
+import React, { createContext, useReducer, useEffect } from 'react';
+import { User } from '../@types';
+import { whoAmI } from '../api';
 
 export enum Actions {
   LOGIN = 'login',
   LOGOUT = 'logout'
 }
 
-export interface IUser {
-  id: number;
-  username: string;
-  email: string;
-}
-
 interface IAuthState {
-  user: IUser | null;
+  user: User | null;
   authenticated: boolean;
+  authError: string;
 }
 
-interface IAction {
+interface Action {
   type: Actions.LOGIN | Actions.LOGOUT;
-  payload: IUser | null;
+  payload: User | null;
 }
 
 interface IAuthContext extends IAuthState {
-  dispatch: React.Dispatch<IAction>;
+  dispatch: React.Dispatch<Action>;
 }
 
 export const AuthContext = createContext<IAuthContext>({
   authenticated: false,
   user: null,
+  authError: '',
   dispatch: () => undefined
 });
 
-const authReducer = (state: IAuthState, action: IAction) => {
+const authReducer = (state: IAuthState, action: Action) => {
   switch (action.type) {
     case Actions.LOGIN:
       return {
@@ -55,20 +51,21 @@ const authReducer = (state: IAuthState, action: IAction) => {
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [state, dispatch] = useReducer(authReducer, {
     user: null,
-    authenticated: false
+    authenticated: false,
+    authError: ''
   });
 
-  // useEffect(() => {
-  //   const getUser = async () => {
-  //     try {
-  //       const user = await whoami();
-  //       dispatch({ type: Actions.LOGIN, payload: user });
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   };
-  //   getUser();
-  // }, []);
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const user = await whoAmI<User>();
+        dispatch({ type: Actions.LOGIN, payload: user });
+      } catch (err) {
+        console.log('err', err);
+      }
+    };
+    getUser();
+  }, []);
 
   return (
     <AuthContext.Provider value={{ ...state, dispatch }}>

@@ -4,13 +4,14 @@ import { User } from '../@types';
 
 const BASE_URL = 'http://localhost:5000/api/user';
 
-export const whoAmI = async () => {
+export const whoAmI = async <T>(): Promise<T> => {
   const token = await AsyncStorage.getItem('token');
-  return axios.get(`${BASE_URL}/whoami`, {
+  const { data } = await axios.get(`${BASE_URL}/whoami`, {
     headers: {
       Authorization: `Bearer ${token}`
     }
   });
+  return data;
 };
 
 export const signup = async (newUser: User) => {
@@ -19,6 +20,12 @@ export const signup = async (newUser: User) => {
 };
 
 export const signin = async (user: Pick<User, 'email' | 'password'>) => {
-  const { data } = await axios.post(`${BASE_URL}/signin`, user);
+  const { data } = await axios.post(`${BASE_URL}/login`, user);
+  return data;
+};
+
+export const signout = async () => {
+  const { data } = await axios.post(`${BASE_URL}/signout`);
+  await AsyncStorage.removeItem('token');
   return data;
 };

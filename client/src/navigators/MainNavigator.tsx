@@ -10,11 +10,11 @@ const MainNavigator = () => {
   return (
     <Tab.Navigator
       initialRouteName='Tracks'
-      tabBarOptions={{
-        activeTintColor: '#e91e63',
-        inactiveBackgroundColor: '#e99c63',
-        activeBackgroundColor: 'rgb(200, 100, 100)'
-      }}
+      // tabBarOptions={{
+      //   activeTintColor: '#e91e63',
+      //   inactiveBackgroundColor: '#e99c63',
+      //   activeBackgroundColor: 'rgb(200, 100, 100)'
+      // }}
     >
       <Tab.Screen
         name='Track'

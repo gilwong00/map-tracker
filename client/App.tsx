@@ -1,12 +1,11 @@
 import 'react-native-gesture-handler';
-import React, { useContext } from 'react';
+import React from 'react';
 import { SafeAreaView, Alert } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import AuthNavigator from './src/navigators/AuthNavigator';
-import MainNavigator from './src/navigators/MainNavigator';
-import AuthProvider, { AuthContext } from './src/context';
+import AuthProvider from './src/context';
+import Home from './src/screens/Home';
 
 export default function App() {
   const queryClient = new QueryClient({
@@ -24,15 +23,15 @@ export default function App() {
       }
     }
   });
-  const { authenticated } = useContext(AuthContext);
 
   return (
+    // this does add some additional padding bottom to the tab navigator
     <SafeAreaProvider>
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
           <SafeAreaView style={{ flex: 1 }}>
             <NavigationContainer>
-              {!authenticated ? <AuthNavigator /> : <MainNavigator />}
+              <Home />
             </NavigationContainer>
           </SafeAreaView>
         </AuthProvider>

@@ -5,6 +5,7 @@ import { UserDocument } from '../schema/user';
 import { logger } from '../utils';
 import jwt from 'jsonwebtoken';
 import requireAuth from '../middleware/requireAuth';
+import { AuthRequest } from '../@types';
 
 const router = Router();
 
@@ -79,8 +80,8 @@ router.post(
   }
 );
 
-router.get('/', requireAuth, (_, res: Response) => {
-  return res.status(200).json('Access');
+router.get('/whoami', requireAuth, (req: AuthRequest, res: Response) => {
+  return res.status(200).json(req.user);
 });
 
 export default router;

@@ -1,11 +1,14 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { Text } from 'react-native-elements';
+import Map from '../components/Map';
 
 const TrackCreate = () => {
   return (
-    <View>
-      <Text>Create Track</Text>
-    </View>
+    <SafeAreaView>
+      <Text h2>Create Track</Text>
+      <Map />
+    </SafeAreaView>
   );
 };
 
