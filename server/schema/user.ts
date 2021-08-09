@@ -11,11 +11,11 @@ export interface UserDocument extends Document {
 const userSchema = new Schema({
   firstName: {
     type: String,
-    required: true
+    default: ''
   },
   lastName: {
     type: String,
-    required: true
+    default: ''
   },
   email: {
     type: String,
