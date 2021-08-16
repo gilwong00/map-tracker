@@ -12,3 +12,7 @@ export interface Location {
   coords: Coordinates;
   timestamp: number;
 }
+
+export interface Track extends Location {
+  userId: string;
+}

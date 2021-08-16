@@ -6,17 +6,20 @@ import {
   LocationActionTypes,
   LocationContext
 } from '../context/LocationContext';
+import { useMutation } from 'react-query';
+import { createTrack, signin } from '../api';
 
 const TrackForm = () => {
   const { dispatch, recording, locations } = useContext(LocationContext);
   const [trackName, setTrackName] = useState<string>('');
+  const { mutateAsync } = useMutation(createTrack, {});
 
   const handlePress = () => {
     return recording
       ? dispatch({ type: LocationActionTypes.STOP_RECORDING })
       : dispatch({ type: LocationActionTypes.START_RECORDING });
   };
-  console.log('loca', locations.length);
+
   return (
     <View style={{ padding: 10, marginTop: 20 }}>
       <FormInput
@@ -28,7 +31,17 @@ const TrackForm = () => {
         title={recording ? 'Stop Recording' : 'Start Record'}
         type='solid'
         onPress={handlePress}
+        disabled={!trackName}
       />
+
+      {locations.length > 0 && !recording && (
+        <Button
+          title='Save Recordings'
+          type='solid'
+          style={{ paddingTop: 15 }}
+          onPress={async () => mutateAsync({ name: trackName, locations })}
+        />
+      )}
     </View>
   );
 };
