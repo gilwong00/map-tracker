@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { Actions, AuthContext } from '../context';
+import { Actions, AuthContext } from '../context/AuthContext';
 import { View, TouchableOpacity } from 'react-native';
 import { Text, Button } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';

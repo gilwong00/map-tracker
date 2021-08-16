@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { AuthContext } from '../context';
+import { AuthContext } from '../context/AuthContext';
 import AuthNavigator from '../navigators/AuthNavigator';
 import MainNavigator from '../navigators/MainNavigator';
 

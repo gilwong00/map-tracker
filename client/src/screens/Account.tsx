@@ -4,8 +4,7 @@ import { Text } from 'react-native';
 import { Button } from 'react-native-elements';
 import { useMutation } from 'react-query';
 import { signout } from '../api';
-import { Actions, AuthContext } from '../context';
-import { authStyles } from '../styles';
+import { Actions, AuthContext } from '../context/AuthContext';
 
 const Account = () => {
   const { dispatch } = useContext(AuthContext);

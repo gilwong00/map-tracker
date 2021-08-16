@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import { Input } from 'react-native-elements';
 
 interface Props {
-  label: string;
+  label?: string;
   value: string;
   handleChange: Dispatch<SetStateAction<string>>;
 }
@@ -25,7 +25,7 @@ const FormInput: React.FC<Props> = ({ value, handleChange, label }) => {
       onChangeText={handleChange}
       autoCapitalize='none'
       autoCorrect={false}
-      secureTextEntry={label.toLocaleLowerCase() === 'password'}
+      secureTextEntry={label?.toLocaleLowerCase() === 'password'}
       renderErrorMessage={!value}
       errorMessage={errorMessage}
       onBlur={() => setErrorMessage(!value ? `${label} is required` : '')}

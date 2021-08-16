@@ -4,7 +4,7 @@ import { SafeAreaView, Alert } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import AuthProvider from './src/context';
+import { AuthProvider, LocationProdiver } from './src/context';
 import Home from './src/screens/Home';
 
 export default function App() {
@@ -29,11 +29,13 @@ export default function App() {
     <SafeAreaProvider>
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
-          <SafeAreaView style={{ flex: 1 }}>
-            <NavigationContainer>
-              <Home />
-            </NavigationContainer>
-          </SafeAreaView>
+          <LocationProdiver>
+            <SafeAreaView style={{ flex: 1 }}>
+              <NavigationContainer>
+                <Home />
+              </NavigationContainer>
+            </SafeAreaView>
+          </LocationProdiver>
         </AuthProvider>
       </QueryClientProvider>
     </SafeAreaProvider>
