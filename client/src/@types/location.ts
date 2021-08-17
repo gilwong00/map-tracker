@@ -13,8 +13,9 @@ export interface Location {
   timestamp: number;
 }
 
-export interface Track extends Location {
+export interface Track {
   _id?: string;
   name?: string;
   userId: string;
+  locations: Array<Location>;
 }
