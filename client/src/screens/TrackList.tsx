@@ -26,14 +26,14 @@ const TrackList = () => {
     <FlatList
       data={data}
       keyExtractor={item => item._id}
-      renderItem={({ item }) => {
+      renderItem={({ item: track }) => {
         return (
           <TouchableOpacity
-            onPress={() => navigation.navigate('TrackDetail', item)}
+            onPress={() => navigation.navigate('TrackDetail', track)}
           >
             <ListItem>
               <ListItem.Content>
-                <ListItem.Title>{item.name}</ListItem.Title>
+                <ListItem.Title>{track.name}</ListItem.Title>
               </ListItem.Content>
               <ListItem.Chevron />
             </ListItem>
