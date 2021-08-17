@@ -14,5 +14,7 @@ export interface Location {
 }
 
 export interface Track extends Location {
+  _id?: string;
+  name?: string;
   userId: string;
 }

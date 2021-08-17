@@ -1,6 +1,7 @@
 import { Router, Response } from 'express';
 import { Track } from '../schema';
 import { AuthRequest } from '../@types';
+import { logger } from '../utils';
 import requireAuth from '../middleware/requireAuth';
 
 const router = Router();
@@ -17,6 +18,8 @@ router.get('/', requireAuth, async (req: AuthRequest, res: Response) => {
 
 router.post('/', requireAuth, async (req: AuthRequest, res: Response) => {
   try {
+    logger.log('info', `[Track Create]: ${JSON.stringify(req.body)}`);
+
     const { name, locations } = req.body;
 
     if (!name || !locations)

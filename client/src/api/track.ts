@@ -16,3 +16,13 @@ export const createTrack = async (newTrack: {
   });
   return data;
 };
+
+export const fetchTracks = async (): Promise<Array<Track>> => {
+  const token = await AsyncStorage.getItem('token');
+  const { data } = await axios.get<Array<Track>>(BASE_URL, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
+  return data;
+};

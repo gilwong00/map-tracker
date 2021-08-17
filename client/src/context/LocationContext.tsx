@@ -5,7 +5,8 @@ export enum LocationActionTypes {
   START_RECORDING = 'START_RECORDING',
   STOP_RECORDING = 'STOP_RECORDING',
   ADD_LOCATION = 'ADD_LOCATION',
-  ADD_CURRENT_LOCATION = 'ADD_CURRENT_LOCATION'
+  ADD_CURRENT_LOCATION = 'ADD_CURRENT_LOCATION',
+  RESET = 'RESET'
 }
 
 interface LocationState {
@@ -19,7 +20,8 @@ interface LocationAction {
     | LocationActionTypes.START_RECORDING
     | LocationActionTypes.STOP_RECORDING
     | LocationActionTypes.ADD_LOCATION
-    | LocationActionTypes.ADD_CURRENT_LOCATION;
+    | LocationActionTypes.ADD_CURRENT_LOCATION
+    | LocationActionTypes.RESET;
   payload?: Location | null;
 }
 
@@ -55,6 +57,12 @@ const locationReducer = (state: LocationState, action: LocationAction) => {
       return {
         ...state,
         locations: [...state.locations, action.payload]
+      };
+    case LocationActionTypes.RESET:
+      return {
+        ...state,
+        locations: [],
+        recording: false
       };
     default:
       return state;

@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { Button } from 'react-native-elements';
 import FormInput from '../components/FormInput';
 import {
@@ -7,12 +8,19 @@ import {
   LocationContext
 } from '../context/LocationContext';
 import { useMutation } from 'react-query';
-import { createTrack, signin } from '../api';
+import { createTrack } from '../api';
 
 const TrackForm = () => {
+  const navigation = useNavigation();
   const { dispatch, recording, locations } = useContext(LocationContext);
   const [trackName, setTrackName] = useState<string>('');
-  const { mutateAsync } = useMutation(createTrack, {});
+  const { mutateAsync } = useMutation(createTrack, {
+    onSuccess: () => {
+      setTrackName('');
+      dispatch({ type: LocationActionTypes.RESET });
+      navigation.navigate('TrackList');
+    }
+  });
 
   const handlePress = () => {
     return recording
@@ -32,6 +40,7 @@ const TrackForm = () => {
         type='solid'
         onPress={handlePress}
         disabled={!trackName}
+        style={{ paddingTop: 15 }}
       />
 
       {locations.length > 0 && !recording && (
